@@ -1,7 +1,6 @@
 # define constants
 
 
-
 PLAYER_1 = "\u274c"
 PLAYER_2 = "\u2b55"
 EMPTY_CELL = "\u2b1c"
@@ -50,18 +49,21 @@ def next_move(board, player):
         user_input = input(f"Enter coordinates ({player}) [A:3]: ").upper()
 
         if len(user_input) != 3:
-            print("Must be no more than 3 characters separated by \":\"\n Please try again.")
+            print(
+                "Must be no more than 3 characters separated by \":\"\n Please try again.")
             continue
         if ord(user_input.split(":")[0]) not in range(65, 65+len(board)):
-            print(f"The first character must be in the range [ A - {chr(65 + len(game_board) - 1)}].\n Please try again.")
+            print(
+                f"The first character must be in the range [ A - {chr(65 + len(game_board) - 1)}].\n Please try again.")
             continue
         if ord(user_input.split(":")[1]) not in range(49, 49+len(board)):
-            print(f"The second character must be a number from [{1} - {1+len(game_board) - 1}]! \nPlease try again.")
+            print(
+                f"The second character must be a number from [{1} - {1+len(game_board) - 1}]! \nPlease try again.")
             continue
 
         row_index = int(user_input[2]) - 1
         cell_index = ord(user_input[0]) - 65
-        
+
         if board[row_index][cell_index] != EMPTY_CELL:
             print("Invalid input. Please try again.")
             continue
@@ -77,14 +79,14 @@ def game_over(board, counter):
     # Check epmty cells
     # if counter >= len(board)**2:
     #     return True
-    
+
     # Check rows
     for row in game_board:
         if row.count(current_player) == len(row):
             print(f"Player {current_player} wins!")
             return True
         pass
-    
+
     # Check columns
     for i in range(len(game_board)):
         column = []
@@ -95,7 +97,7 @@ def game_over(board, counter):
             print(f"Player {current_player} wins!")
             return True
         pass
-    
+
     # Check diagonals
     diagonal_1 = []
     diagonal_2 = []
@@ -112,19 +114,18 @@ def game_over(board, counter):
     return False
 
 
-
 current_player = PLAYER_1
 move_counter = 0
 game_board = create_game_board()
 
 while not game_over(game_board, move_counter):
-    
+
     move_counter += 1
 
     print(draw_board(game_board))
 
     next_move(game_board, current_player)
-    
+
     if game_over(game_board, move_counter):
         break
 
