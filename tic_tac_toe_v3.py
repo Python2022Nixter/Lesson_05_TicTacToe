@@ -1,5 +1,5 @@
 # define constants
-from posixpath import split
+
 
 
 PLAYER_1 = "\u274c"
